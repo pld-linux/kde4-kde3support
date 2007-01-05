@@ -1,40 +1,169 @@
+
+ kdecore/Makefile.am    |    2 +
+ kdecore/klibloader.cpp |   86 +++++++++++++++++++++++++++----------------------
+ kdecore/klibloader.h   |    2 -
+ kinit/kinit.cpp        |    8 +---
+ 4 files changed, 55 insertions(+), 43 deletions(-)
+
+--- kdelibs-3.5.5/kdecore/Makefile.am.orig	2006-10-01 19:33:38.000000000 +0200
++++ kdelibs-3.5.5/kdecore/Makefile.am	2007-01-05 00:17:27.235678750 +0100
+@@ -115,8 +115,10 @@
+ 	kuser.cpp kconfigskeleton.cpp kconfigdialogmanager.cpp klockfile.cpp \
+ 	kqiodevicegzip_p.cpp ktimezones.cpp
+ 
++CXXFLAGS += -fexceptions
+ libkdecore_la_LDFLAGS = $(QT_LDFLAGS) $(KDE_RPATH) $(KDE_MT_LDFLAGS) $(X_LDFLAGS) $(USER_LDFLAGS) -version-info 6:0:2 -no-undefined
+ libkdecore_la_LIBADD = malloc/libklmalloc.la network/libkdecorenetwork.la $(SVGICON_LIB) ../dcop/libDCOP.la ../libltdl/libltdlc.la $(LIB_XEXT) $(LIBRESOLV) $(LIBUTIL) $(LIBART_LIBS) $(LIB_IDN) ../kdefx/libkdefx.la
++libkdecore_la_LIBADD += -lboost_filesystem -lboost_regex
+ libkdecore_la_NMCHECK = $(srcdir)/libkdecore.nmcheck
+ libkdecore_la_NMCHECKWEAK = $(srcdir)/libkdecore_weak.nmcheck $(srcdir)/libqt-mt_weak.nmcheck \
+ 	$(top_srcdir)/dcop/libDCOP_weak.nmcheck $(top_srcdir)/kdecore/standard_weak.nmcheck
+--- kdelibs-3.5.5/kdecore/klibloader.h.orig	2005-10-10 17:06:03.000000000 +0200
++++ kdelibs-3.5.5/kdecore/klibloader.h	2007-01-04 23:19:39.868039250 +0100
+@@ -270,7 +270,7 @@
+      * wants to open modules.
+      * @param name of the library. If it is not a path, the function searches in
+      *             the "module" and "lib" resources. If there is no extension,
+-     *             ".la" will be appended.
++     *             ".so*" will be appended.
+      * @param instance a KInstance used to get the standard paths
+      */
+     static QString findLibrary( const char * name, const KInstance * instance = KGlobal::instance() );
 --- kdelibs-3.5.5/kdecore/klibloader.cpp.orig	2006-01-19 17:06:18.000000000 +0000
-+++ kdelibs-3.5.5/kdecore/klibloader.cpp	2006-12-18 09:09:18.073572750 +0000
-@@ -341,7 +341,7 @@
-     if (pos < 0)
-       pos = 0;
-     if (libname.find('.', pos) < 0)
--      libname += ".la";
-+      libname += ".so";
-     return libname;
++++ kdelibs-3.5.5/kdecore/klibloader.cpp	2007-01-05 00:08:39.215039750 +0000
+@@ -331,43 +331,59 @@
+     d = 0L;
  }
  
---- kdelibs-3.5.5/kinit/kinit.cpp.orig	2006-10-01 17:33:32.000000000 +0000
-+++ kdelibs-3.5.5/kinit/kinit.cpp	2006-12-18 09:10:22.425406500 +0000
+-static inline QCString makeLibName( const char* name )
++#include <boost/filesystem/exception.hpp>
++#include <boost/filesystem/operations.hpp>
++#include <boost/filesystem/path.hpp>
++#include <boost/regex.hpp>
++
++QCString makeSharedLibraryName( char const* name, QString const& dir )
+ {
+-    QCString libname(name);
+-    // only append ".la" if there is no extension
+-    // this allows to load non-libtool libraries as well
+-    // (mhk, 20000228)
+-    int pos = libname.findRev('/');
+-    if (pos < 0)
+-      pos = 0;
+-    if (libname.find('.', pos) < 0)
+-      libname += ".la";
+-    return libname;
++	try
++	{
++		boost::filesystem::path d( dir.ascii() );
++		std::string p = d.string() + "/" + name + ".so";
++		if ( boost::filesystem::exists( p ) )
++			return p.c_str();
++		boost::regex re( p + "\\..+", boost::regex::extended );
++		for ( boost::filesystem::directory_iterator i( d );
++			i != boost::filesystem::directory_iterator(); ++i )
++		{
++			boost::smatch m;
++			if ( boost::regex_match( i->string(), m, re ) )
++				return m.str().c_str();
++		}
++	}
++	catch ( boost::filesystem::filesystem_error const& )
++	{
++	}
++	return QCString();
+ }
+ 
+-//static
+ QString KLibLoader::findLibrary( const char * name, const KInstance * instance )
+ {
+-    QCString libname = makeLibName( name );
+-
+-    // only look up the file if it is not an absolute filename
+-    // (mhk, 20000228)
+-    QString libfile;
+-    if (!QDir::isRelativePath(libname))
+-      libfile = QFile::decodeName( libname );
+-    else
+-    {
+-      libfile = instance->dirs()->findResource( "module", libname );
+-      if ( libfile.isEmpty() )
+-      {
+-        libfile = instance->dirs()->findResource( "lib", libname );
+-#ifndef NDEBUG
+-        if ( !libfile.isEmpty() && libname.left(3) == "lib" ) // don't warn for kdeinit modules
+-          kdDebug(150) << "library " << libname << " not found under 'module' but under 'lib'" << endl;
+-#endif
+-      }
+-    }
+-    return libfile;
++	try
++	{
++		if ( boost::filesystem::exists( name ) )
++			return name;
++	}
++	catch ( boost::filesystem::filesystem_error const& )
++	{
++	}
++	QStringList dirs = instance->dirs()->resourceDirs( "module" );
++	for ( QStringList::ConstIterator i = dirs.begin(); i != dirs.end(); ++i )
++	{
++		QCString p = makeSharedLibraryName( name, *i );
++		if ( !p.isNull() )
++			return p;
++	}
++	dirs = instance->dirs()->resourceDirs( "lib" );
++	for ( QStringList::ConstIterator i = dirs.begin(); i != dirs.end(); ++i )
++	{
++		QCString p = makeSharedLibraryName( name, *i );
++		if ( !p.isNull() )
++			return p;
++	}
++	return QString::null;
+ }
+ 
+ 
+@@ -418,11 +434,7 @@
+       QString libfile = findLibrary( name );
+       if ( libfile.isEmpty() )
+       {
+-        const QCString libname = makeLibName( name );
+-#ifndef NDEBUG
+-        kdDebug(150) << "library=" << name << ": No file named " << libname << " found in paths." << endl;
+-#endif
+-        d->errorMessage = i18n("Library files for \"%1\" not found in paths.").arg(libname);
++        d->errorMessage = i18n("Library files for \"%1\" not found in paths.").arg(name);
+         return 0;
+       }
+ 
+--- kdelibs-3.5.5/kinit/kinit.cpp.orig	2006-10-01 19:33:32.000000000 +0200
++++ kdelibs-3.5.5/kinit/kinit.cpp	2007-01-04 23:39:00.780591750 +0100
 @@ -447,7 +447,7 @@
    {
       /* Relative name without '.la' */
       name = _name;
 -     lib = name + ".la";
-+     lib = name + ".so";
++     lib = name;
       exec = name;
       libpath = QFile::encodeName(KLibLoader::findLibrary( lib, s_instance ));
       execpath = execpath_avoid_loops( exec, envc, envs, avoid_loops );
-@@ -458,7 +458,7 @@
+@@ -458,9 +458,7 @@
       name = _name;
       name = name.mid( name.findRev('/') + 1);
       exec = _name;
 -     if (lib.right(3) == ".la")
-+     if (lib.right(3) == ".so")
-         libpath = lib;
-      else
+-        libpath = lib;
+-     else
++     if ( libpath.findRev( ".so" ) == -1 )
          execpath = exec;
-@@ -1807,7 +1807,7 @@
+   }
+   if (!args)
+@@ -1807,7 +1805,7 @@
  #ifndef __CYGWIN__
     if (!d.suicide && !getenv("KDE_IS_PRELINKED"))
     {
 -      QString konq = locate("lib", "libkonq.la", s_instance);
-+      QString konq = locate("lib", "libkonq.so", s_instance);
++      QString konq = KLibLoader::findLibrary( "libkonq", s_instance );
        if (!konq.isEmpty())
  	  (void) lt_dlopen(QFile::encodeName(konq).data());
     }
