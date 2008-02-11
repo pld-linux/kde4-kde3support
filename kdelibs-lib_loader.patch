@@ -56,7 +56,7 @@
 +	try
 +	{
 +		boost::filesystem::path d( dir.ascii() );
-+		std::string p = d.string() + "/" + name + ".so";
++		std::string p = d.string() + name + ".so";
 +		if ( boost::filesystem::exists( p ) )
 +			return p.c_str();
 +		boost::regex re( p + "\\..+", boost::regex::extended );
