@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	1
+Release:	2
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -88,7 +88,7 @@ Requires:	docbook-dtd412-xml
 Requires:	docbook-dtd42-xml
 Requires:	docbook-style-xsl
 Requires:	hicolor-icon-theme
-Requires:	kde-common-dirs
+Requires:	kde-common-dirs >= 0.2
 Requires:	libxml2-progs
 Requires:	qt >= 6:3.3.3-4
 Requires:	setup >= 2.4.6-7
@@ -274,12 +274,6 @@ if [ ! -f installed.stamp ]; then
 		$RPM_BUILD_ROOT%{_datadir}/applnk/.hidden \
 		$RPM_BUILD_ROOT%{_datadir}/services/kconfiguredialog \
 
-	install -d $RPM_BUILD_ROOT%{_kdedocdir}/{ca,cs,da,de,en,en_GB,es,et,fi,fr,hu,it,ja,nb,nl,pl,pt,pt_BR,ro,ru,sk,sl,sv,tr,uk,zh_TW}/common
-
-	# For fileshare
-	touch $RPM_BUILD_ROOT/etc/security/fileshare.conf
-	%{__sed} -i -e 's|/etc/init.d|/etc/rc.d/init.d|g' $RPM_BUILD_ROOT%{_bindir}/fileshare*
-
 	# packaged by hicolor-icon-theme
 	rm $RPM_BUILD_ROOT%{_iconsdir}/hicolor/index.theme
 
@@ -288,6 +282,12 @@ if [ ! -f installed.stamp ]; then
 	# keep $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidget.la for kdebase and others.
 	rm $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/styles/*.la
 	rm $RPM_BUILD_ROOT%{_libdir}/libkdeinit_*.la
+	rm -rf $RPM_BUILD_ROOT%{_datadir}/apps
+	rm -rf $RPM_BUILD_ROOT%{_datadir}/doc
+	rm -rf $RPM_BUILD_ROOT%{_datadir}/locale
+	rm -rf $RPM_BUILD_ROOT/etc/
+	rm -f $RPM_BUILD_ROOT%{_bindir}/{artsmessage,checkXML,kgrantpty,ksvgtopng,kunittestmodrunner,makekdewidgets}
+	rm -rf $RPM_BUILD_ROOT%{_datadir}/config
 
 	# remove unwanted boost deps from .la
 	sed -i 's:-lboost_filesystem -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
@@ -304,7 +304,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%ghost /etc/security/fileshare.conf
 %attr(755,root,root) %{_bindir}/cupsdconf
 %attr(755,root,root) %{_bindir}/cupsdoprint
 %attr(755,root,root) %{_bindir}/dcop
@@ -442,58 +441,6 @@ rm -rf $RPM_BUILD_ROOT
 
 # 3rdparty directories
 %dir %{_datadir}/services/kconfiguredialog
-
-%lang(en) %{_kdedocdir}/en/kspell
-%lang(ca) %dir %{_kdedocdir}/ca
-%lang(ca) %dir %{_kdedocdir}/ca/common
-%lang(cs) %dir %{_kdedocdir}/cs
-%lang(cs) %dir %{_kdedocdir}/cs/common
-%lang(da) %dir %{_kdedocdir}/da
-%lang(da) %dir %{_kdedocdir}/da/common
-%lang(de) %dir %{_kdedocdir}/de
-%lang(de) %dir %{_kdedocdir}/de/common
-%lang(es) %dir %{_kdedocdir}/es
-%lang(es) %dir %{_kdedocdir}/es/common
-%lang(en_GB) %dir %{_kdedocdir}/en_GB
-%lang(en_GB) %dir %{_kdedocdir}/en_GB/common
-%lang(et) %dir %{_kdedocdir}/et
-%lang(et) %dir %{_kdedocdir}/et/common
-%lang(fi) %dir %{_kdedocdir}/fi
-%lang(fi) %dir %{_kdedocdir}/fi/common
-%lang(fr) %dir %{_kdedocdir}/fr
-%lang(fr) %dir %{_kdedocdir}/fr/common
-%lang(hu) %dir %{_kdedocdir}/hu
-%lang(hu) %dir %{_kdedocdir}/hu/common
-%lang(it) %dir %{_kdedocdir}/it
-%lang(it) %dir %{_kdedocdir}/it/common
-%lang(ja) %dir %{_kdedocdir}/ja
-%lang(ja) %dir %{_kdedocdir}/ja/common
-%lang(nb) %dir %{_kdedocdir}/nb
-%lang(nb) %dir %{_kdedocdir}/nb/common
-%lang(nl) %dir %{_kdedocdir}/nl
-%lang(nl) %dir %{_kdedocdir}/nl/common
-%lang(pl) %dir %{_kdedocdir}/pl
-%lang(pl) %dir %{_kdedocdir}/pl/common
-%lang(pt) %dir %{_kdedocdir}/pt
-%lang(pt) %dir %{_kdedocdir}/pt/common
-%lang(pt_BR) %dir %{_kdedocdir}/pt_BR
-%lang(pt_BR) %dir %{_kdedocdir}/pt_BR/common
-%lang(ro) %dir %{_kdedocdir}/ro
-%lang(ro) %dir %{_kdedocdir}/ro/common
-%lang(ru) %dir %{_kdedocdir}/ru
-%lang(ru) %dir %{_kdedocdir}/ru/common
-%lang(sk) %dir %{_kdedocdir}/sk
-%lang(sk) %dir %{_kdedocdir}/sk/common
-%lang(sl) %dir %{_kdedocdir}/sl
-%lang(sl) %dir %{_kdedocdir}/sl/common
-%lang(sv) %dir %{_kdedocdir}/sv
-%lang(sv) %dir %{_kdedocdir}/sv/common
-%lang(tr) %dir %{_kdedocdir}/tr
-%lang(tr) %dir %{_kdedocdir}/tr/common
-%lang(uk) %dir %{_kdedocdir}/uk
-%lang(uk) %dir %{_kdedocdir}/uk/common
-%lang(zh_TW) %dir %{_kdedocdir}/zh_TW
-%lang(zh_TW) %dir %{_kdedocdir}/zh_TW/common
 
 # merged kabc files
 %attr(755,root,root) %{_bindir}/kab2kabc
