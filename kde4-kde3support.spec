@@ -93,7 +93,6 @@ Requires:	libxml2-progs
 Requires:	qt >= 6:3.3.3-4
 Requires:	setup >= 2.4.6-7
 Requires:	xorg-app-iceauth
-Provides:	kdelibs = 9:3.5.10
 Obsoletes:	kdelibs
 Conflicts:	sim < 0.9.3-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
