@@ -374,9 +374,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(4755,root,root) %{_bindir}/start_kdeinit
 %attr(755,root,root) %{_bindir}/start_kdeinit_wrapper
 
-%dir %{_datadir}/autostart
 %{_datadir}/mimelnk
-%dir %{_datadir}/services
 %dir %{_datadir}/services/kresources
 %{_datadir}/services/kresources/kabc_manager.desktop
 %{_datadir}/services/kded
