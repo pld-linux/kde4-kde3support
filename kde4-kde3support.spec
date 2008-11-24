@@ -89,6 +89,7 @@ Requires:	docbook-dtd42-xml
 Requires:	docbook-style-xsl
 Requires:	hicolor-icon-theme
 Requires:	kde-common-dirs >= 0.2
+Requires:	kde4-icons-crystalsvg
 Requires:	libxml2-progs
 Requires:	qt >= 6:3.3.3-4
 Requires:	setup >= 2.4.6-7
@@ -284,12 +285,10 @@ if [ ! -f installed.stamp ]; then
 	# keep $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidget.la for kdebase and others.
 	rm $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/styles/*.la
 	rm $RPM_BUILD_ROOT%{_libdir}/libkdeinit_*.la
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/apps
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/doc
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/locale
+	rm -rf $RPM_BUILD_ROOT%{_datadir}/{apps,doc,locale,config,emoticons}
 	rm -rf $RPM_BUILD_ROOT/etc/
 	rm -f $RPM_BUILD_ROOT%{_bindir}/{artsmessage,checkXML,kgrantpty,ksvgtopng,kunittestmodrunner,makekdewidgets,kconfig_compiler}
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/config
+	rm -rf $RPM_BUILD_ROOT%{_iconsdir}
 
 	# remove unwanted boost deps from .la
 	sed -i 's:-lboost_filesystem -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
@@ -376,8 +375,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/start_kdeinit_wrapper
 
 %dir %{_datadir}/autostart
-%dir %{_datadir}/emoticons
-%{_datadir}/emoticons/Default
 %{_datadir}/mimelnk
 %dir %{_datadir}/services
 %dir %{_datadir}/services/kresources
@@ -449,9 +446,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/services/rtspu.protocol
 %{_datadir}/servicetypes
 %dir %{_desktopdir}/kde
-# contains also 3rdparty hicolor & crystalsvg/apps trees
-%{_iconsdir}/crystalsvg
-%{_iconsdir}/default.kde
 
 # 3rdparty directories
 %dir %{_datadir}/services/kconfiguredialog
