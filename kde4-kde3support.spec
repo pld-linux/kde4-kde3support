@@ -275,11 +275,12 @@ if [ ! -f installed.stamp ]; then
 		$RPM_BUILD_ROOT/etc/security \
 		$RPM_BUILD_ROOT%{_libdir}/kconf_update_bin \
 		$RPM_BUILD_ROOT%{_libdir}/kde3dev \
-		$RPM_BUILD_ROOT%{_includedir}/kde3 \
 		$RPM_BUILD_ROOT%{_datadir}/applnk/.hidden \
 		$RPM_BUILD_ROOT%{_datadir}/services/kconfiguredialog \
 
-	cp -ar $RPM_BUILD_ROOT%{_includedir}/* $RPM_BUILD_ROOT%{_includedir}/kde3/
+	mv $RPM_BUILD_ROOT%{_includedir} $RPM_BUILD_ROOT/kde3inc
+	install -d $RPM_BUILD_ROOT%{_includedir}
+	mv $RPM_BUILD_ROOT/kde3inc $RPM_BUILD_ROOT%{_includedir}/kde3
 	# packaged by hicolor-icon-theme
 	rm $RPM_BUILD_ROOT%{_iconsdir}/hicolor/index.theme
 
