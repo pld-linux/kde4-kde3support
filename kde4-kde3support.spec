@@ -254,7 +254,6 @@ export path_sudo=%{_bindir}/sudo
 	--with-lua-includes=%{_includedir}/lua50 \
 	--with-qt-libraries=%{_libdir} \
 	--with-sudo-kdesu-backend \
-	--includedir=%{_includedir}/kde3 \
 	--oldincludedir=%{_includedir}/kde3
 
 %{__make}
@@ -276,9 +275,11 @@ if [ ! -f installed.stamp ]; then
 		$RPM_BUILD_ROOT/etc/security \
 		$RPM_BUILD_ROOT%{_libdir}/kconf_update_bin \
 		$RPM_BUILD_ROOT%{_libdir}/kde3dev \
+		$RPM_BUILD_ROOT%{_includedir}/kde3 \
 		$RPM_BUILD_ROOT%{_datadir}/applnk/.hidden \
 		$RPM_BUILD_ROOT%{_datadir}/services/kconfiguredialog \
 
+	cp -ar $RPM_BUILD_ROOT%{_includedir}/* $RPM_BUILD_ROOT%{_includedir}/kde3/
 	# packaged by hicolor-icon-theme
 	rm $RPM_BUILD_ROOT%{_iconsdir}/hicolor/index.theme
 
