@@ -102,6 +102,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # confuses OpenEXR detection
 %undefine	configure_cache
 
+%define		no_install_post_check_so	1
+# unresolved symbols in libkscreensaver.so.X (by design)
+
 %description
 This package includes libraries that are central to the development
 and execution of a KDE program, misc HTML documentation and theme
@@ -213,9 +216,6 @@ para compilar aplicativos KDE.
 Цей пакет містить хедери, необхідні
 для компіляції програм для KDE.
 
-%define	no_install_post_check_so	1
-# unresolved symbols in libkscreensaver.so.X (by design)
-
 %prep
 %setup -q -n %{origname}-%{version}
 %patch0 -p1
@@ -302,10 +302,9 @@ if [ ! -f installed.stamp ]; then
 fi
 
 # put symlinks to a different folder in %_libdir
-cd $RPM_BUILD_ROOT/%{_libdir}
-for link in $(ls *.so)
-do
-	sover=$(ls $link.*.*.* |sed -e s@$link@@)
+cd $RPM_BUILD_ROOT%{_libdir}
+for link in $(ls *.so); do
+	sover=$(ls $link.*.*.* | sed -e s@$link@@)
 	if [ -h $link ]; then
 		rm -f $link
 		ln -s ../$link$sover kde3dev/$link
