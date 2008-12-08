@@ -24,6 +24,7 @@ Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
 # Source0-md5:	43cd55ed15f63b5738d620ef9f9fd568
 Source1:	crystalsvg-kde3.tar.bz2
+# Source1-md5:	0d65bc7ec58348cdd57168744cbc3514
 Patch0:		kde-ac260-lt.patch
 Patch1:		kdelibs-lib_loader.patch
 Patch2:		kdelibs-inotify.patch
