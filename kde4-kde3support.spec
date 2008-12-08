@@ -18,11 +18,12 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	3
+Release:	4
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
 # Source0-md5:	43cd55ed15f63b5738d620ef9f9fd568
+Source1:	crystalsvg-kde3.tar.bz2
 Patch0:		kde-ac260-lt.patch
 Patch1:		kdelibs-lib_loader.patch
 Patch2:		kdelibs-inotify.patch
@@ -90,7 +91,7 @@ Requires:	docbook-dtd42-xml
 Requires:	docbook-style-xsl
 Requires:	hicolor-icon-theme
 Requires:	kde-common-dirs >= 0.2
-Requires:	kde4-icons-crystalsvg
+Requires:	kde4-icons-crystalsvg >= 4.1.82-2
 Requires:	libxml2-progs
 Requires:	qt >= 6:3.3.3-4
 Requires:	setup >= 2.4.6-7
@@ -121,8 +122,7 @@ Bibliotecas para KDE.
 
 %description -l pl.UTF-8
 Ten pakiet zawiera biblioteki potrzebne do rozwijania i uruchamiania
-aplikacji KDE, różną dokumentację oraz moduły z motywami wyglądu
-KDE.
+aplikacji KDE, różną dokumentację oraz moduły z motywami wyglądu KDE.
 
 Pakiet ten zawiera między innymi:
 - kdecore - podstawową bibliotekę KDE,
@@ -204,20 +204,18 @@ Pakiet ten zawiera pliki nagłówkowe i dokumentację potrzebną przy
 pisaniu własnych programów wykorzystujących kdelibs.
 
 %description devel -l pt_BR.UTF-8
-Este pacote contém os arquivos de inclusão que são necessários
-para compilar aplicativos KDE.
+Este pacote contém os arquivos de inclusão que são necessários para
+compilar aplicativos KDE.
 
 %description devel -l ru.UTF-8
-Этот пакет содержит хедеры,
-необходимые для компиляции программ
-для KDE.
+Этот пакет содержит хедеры, необходимые для компиляции программ для
+KDE.
 
 %description devel -l uk.UTF-8
-Цей пакет містить хедери, необхідні
-для компіляції програм для KDE.
+Цей пакет містить хедери, необхідні для компіляції програм для KDE.
 
 %prep
-%setup -q -n %{origname}-%{version}
+%setup -q -n %{origname}-%{version} -a1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -292,7 +290,11 @@ if [ ! -f installed.stamp ]; then
 	rm -rf $RPM_BUILD_ROOT%{_datadir}/{apps,doc,locale,config,emoticons}
 	rm -rf $RPM_BUILD_ROOT/etc/
 	rm -f $RPM_BUILD_ROOT%{_bindir}/{artsmessage,checkXML,kgrantpty,ksvgtopng,kunittestmodrunner,makekdewidgets,kconfig_compiler}
+
+	# install compat symlinks to kde3
 	rm -rf $RPM_BUILD_ROOT%{_iconsdir}
+	install -d $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
+	cp -a crystalsvg-kde3/*/ $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
 
 	# remove unwanted boost deps from .la
 	sed -i 's:-lboost_filesystem -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
@@ -447,6 +449,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/services/rtspu.protocol
 %{_datadir}/servicetypes
 %dir %{_desktopdir}/kde
+
+# compat links to actual crystalsvg icons from kde4
+%{_iconsdir}/crystalsvg/*/*/*
 
 # 3rdparty directories
 %dir %{_datadir}/services/kconfiguredialog
