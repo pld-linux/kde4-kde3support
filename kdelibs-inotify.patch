@@ -1,10 +1,9 @@
---- kdelibs-3.5.10/kio/kio/kdirwatch.cpp.org	2008-11-06 18:36:38.663669249 +0100
-+++ kdelibs-3.5.10/kio/kio/kdirwatch.cpp	2008-11-06 18:37:21.566582248 +0100
-@@ -68,38 +68,7 @@
+--- kdelibs-3.5.10/kio/kio/kdirwatch.cpp~	2009-04-23 17:42:34.000000000 +0300
++++ kdelibs-3.5.10/kio/kio/kdirwatch.cpp	2009-04-23 17:51:10.164116136 +0300
+@@ -71,38 +71,7 @@
  #include <unistd.h>
  #include <fcntl.h>
  #include <sys/syscall.h>
--#include <linux/types.h>
 -// Linux kernel headers are documented to not compile
 -#define _S390_BITOPS_H
 -#include <linux/inotify.h>
@@ -23,7 +22,9 @@
 -{
 -  return syscall (__NR_inotify_rm_watch, fd, wd);
 -}
+-#endif
 -
+-#ifdef HAVE_INOTIFY
 -#ifndef  IN_ONLYDIR
 -#define  IN_ONLYDIR 0x01000000 
 -#endif
@@ -35,7 +36,6 @@
 -#ifndef IN_MOVE_SELF
 -#define IN_MOVE_SELF 0x00000800
 -#endif
--
 +#include <sys/inotify.h>
  #endif
  
