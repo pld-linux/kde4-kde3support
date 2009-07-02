@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	6
+Release:	7
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -28,6 +28,7 @@ Source1:	crystalsvg-kde3.tar.bz2
 Patch0:		kde-ac260-lt.patch
 Patch1:		kdelibs-lib_loader.patch
 Patch2:		kdelibs-inotify.patch
+Patch3:		kde-am.patch
 URL:		http://www.kde.org/
 BuildRequires:	OpenEXR-devel >= 1.4.0.a
 BuildRequires:	acl-devel
@@ -219,6 +220,7 @@ KDE.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 mv -f configure{,.dist}
 
