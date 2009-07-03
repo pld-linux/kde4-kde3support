@@ -1,0 +1,23 @@
+--- kdelibs-3.5.10/kioslave/ftp/ftp.cc~	2008-08-19 20:18:12.000000000 +0200
++++ kdelibs-3.5.10/kioslave/ftp/ftp.cc	2009-07-04 00:25:31.109366056 +0200
+@@ -876,9 +876,9 @@
+   // The usual answer is '227 Entering Passive Mode. (160,39,200,55,6,245)'
+   // but anonftpd gives '227 =160,39,200,55,6,245'
+   int i[6];
+-  char *start = strchr(ftpResponse(3), '(');
++  char *start = strchr((char *)ftpResponse(3), '(');
+   if ( !start )
+-    start = strchr(ftpResponse(3), '=');
++    start = strchr((char *)ftpResponse(3), '=');
+   if ( !start ||
+        ( sscanf(start, "(%d,%d,%d,%d,%d,%d)",&i[0], &i[1], &i[2], &i[3], &i[4], &i[5]) != 6 &&
+          sscanf(start, "=%d,%d,%d,%d,%d,%d", &i[0], &i[1], &i[2], &i[3], &i[4], &i[5]) != 6 ) )
+@@ -931,7 +931,7 @@
+     return ERR_INTERNAL;
+   }
+ 
+-  char *start = strchr(ftpResponse(3), '|');
++  char *start = strchr((char *)ftpResponse(3), '|');
+   if ( !start || sscanf(start, "|||%d|", &portnum) != 1)
+     return ERR_INTERNAL;
+ 
