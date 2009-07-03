@@ -29,6 +29,7 @@ Patch0:		kde-ac260-lt.patch
 Patch1:		kdelibs-lib_loader.patch
 Patch2:		kdelibs-inotify.patch
 Patch3:		kde-am.patch
+Patch4:		kdelibs-gcc4.patch
 URL:		http://www.kde.org/
 BuildRequires:	OpenEXR-devel >= 1.4.0.a
 BuildRequires:	acl-devel
@@ -221,6 +222,7 @@ KDE.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 mv -f configure{,.dist}
 
