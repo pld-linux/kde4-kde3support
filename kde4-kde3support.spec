@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	9
+Release:	10
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -653,86 +653,86 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/dcopidl2cpp
 #%attr(755,root,root) %{_bindir}/kconfig_compiler
 %{_includedir}/kde3
-%{_libdir}/kde3/plugins/designer/kdewidgets.la
-%{_libdir}/libDCOP.la
+#%{_libdir}/kde3/plugins/designer/kdewidgets.la
+#%{_libdir}/libDCOP.la
 %dir %{_libdir}/kde3dev
 %attr(755,root,root) %{_libdir}/kde3dev/libDCOP.so
 %if %{with arts}
-%{_libdir}/libartskde.la
+#%{_libdir}/libartskde.la
 %attr(755,root,root) %{_libdir}/kde3dev/libartskde.so
 %endif
-%{_libdir}/libkabc.la
+#%{_libdir}/libkabc.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkabc.so
-%{_libdir}/libkabc_dir.la
+#%{_libdir}/libkabc_dir.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkabc_dir.so
-%{_libdir}/libkabc_file.la
+#%{_libdir}/libkabc_file.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkabc_file.so
-%{_libdir}/libkabc_ldapkio.la
+#%{_libdir}/libkabc_ldapkio.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkabc_ldapkio.so
-%{_libdir}/libkatepartinterfaces.la
+#%{_libdir}/libkatepartinterfaces.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkatepartinterfaces.so
-%{_libdir}/libkdecore.la
+#%{_libdir}/libkdecore.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdecore.so
-%{_libdir}/libkdefakes.la
+#%{_libdir}/libkdefakes.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdefakes.so
-%{_libdir}/libkdefakes_nonpic.a
-%{_libdir}/libkdefx.la
+#%{_libdir}/libkdefakes_nonpic.a
+#%{_libdir}/libkdefx.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdefx.so
-%{_libdir}/libkdeprint.la
+#%{_libdir}/libkdeprint.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdeprint.so
-%{_libdir}/libkdeprint_management.la
+#%{_libdir}/libkdeprint_management.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdeprint_management.so
-%{_libdir}/libkdesasl.la
+#%{_libdir}/libkdesasl.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdesasl.so
-%{_libdir}/libkdesu.la
+#%{_libdir}/libkdesu.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdesu.so
-%{_libdir}/libkdeui.la
+#%{_libdir}/libkdeui.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdeui.so
-%{_libdir}/libkdnssd.la
+#%{_libdir}/libkdnssd.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdnssd.so
-%{_libdir}/libkhtml.la
+#%{_libdir}/libkhtml.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkhtml.so
-%{_libdir}/libkimproxy.la
+#%{_libdir}/libkimproxy.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkimproxy.so
-%{_libdir}/libkio.la
+#%{_libdir}/libkio.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkio.so
-%{_libdir}/libkjava.la
+#%{_libdir}/libkjava.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkjava.so
-%{_libdir}/libkjs.la
+#%{_libdir}/libkjs.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkjs.so
-%{_libdir}/libkmdi.la
+#%{_libdir}/libkmdi.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkmdi.so
-%{_libdir}/libkmdi2.la
+#%{_libdir}/libkmdi2.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkmdi2.so
-%{_libdir}/libkmediaplayer.la
+#%{_libdir}/libkmediaplayer.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkmediaplayer.so
-%{_libdir}/libkmid.la
+#%{_libdir}/libkmid.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkmid.so
-%{_libdir}/libknewstuff.la
+#%{_libdir}/libknewstuff.la
 %attr(755,root,root) %{_libdir}/kde3dev/libknewstuff.so
-%{_libdir}/libkntlm.la
+#%{_libdir}/libkntlm.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkntlm.so
-%{_libdir}/libkparts.la
+#%{_libdir}/libkparts.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkparts.so
-%{_libdir}/libkresources.la
+#%{_libdir}/libkresources.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkresources.so
-%{_libdir}/libkscreensaver.la
+#%{_libdir}/libkscreensaver.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkscreensaver.so
-%{_libdir}/libkscript.la
+#%{_libdir}/libkscript.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkscript.so
-%{_libdir}/libkspell.la
+#%{_libdir}/libkspell.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkspell.so
-%{_libdir}/libkspell2.la
+#%{_libdir}/libkspell2.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkspell2.so
-%{_libdir}/libktexteditor.la
+#%{_libdir}/libktexteditor.la
 %attr(755,root,root) %{_libdir}/kde3dev/libktexteditor.so
-%{_libdir}/libkunittest.la
+#%{_libdir}/libkunittest.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkunittest.so
-%{_libdir}/libkutils.la
+#%{_libdir}/libkutils.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkutils.so
-%{_libdir}/libkwalletbackend.la
+#%{_libdir}/libkwalletbackend.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkwalletbackend.so
-%{_libdir}/libkwalletclient.la
+#%{_libdir}/libkwalletclient.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkwalletclient.so
-%{_libdir}/libvcard.la
+#%{_libdir}/libvcard.la
 %attr(755,root,root) %{_libdir}/kde3dev/libvcard.so
