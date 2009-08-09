@@ -26,10 +26,11 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{versio
 Source1:	crystalsvg-kde3.tar.bz2
 # Source1-md5:	0d65bc7ec58348cdd57168744cbc3514
 Patch0:		kde-ac260-lt.patch
-Patch1:		kdelibs-lib_loader.patch
-Patch2:		kdelibs-inotify.patch
-Patch3:		kde-am.patch
-Patch4:		kdelibs-gcc4.patch
+Patch1:		kde-common-PLD.patch
+Patch2:		kdelibs-lib_loader.patch
+Patch3:		kdelibs-inotify.patch
+Patch4:		kde-am.patch
+Patch5:		kdelibs-gcc4.patch
 URL:		http://www.kde.org/
 BuildRequires:	OpenEXR-devel >= 1.4.0.a
 BuildRequires:	acl-devel
@@ -223,8 +224,11 @@ KDE.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 mv -f configure{,.dist}
+
+sed -i -e 's#AH_CHECK_HEADERS#AC_CHECK_HEADERS#g' admin/acinclude.m4.in
 
 %build
 # merge cacert root certificate
