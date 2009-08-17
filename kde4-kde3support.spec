@@ -228,8 +228,6 @@ KDE.
 
 mv -f configure{,.dist}
 
-sed -i -e 's#AH_CHECK_HEADERS#AC_CHECK_HEADERS#g' admin/acinclude.m4.in
-
 %build
 # merge cacert root certificate
 cd kio/kssl/kssl
