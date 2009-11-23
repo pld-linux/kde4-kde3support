@@ -18,13 +18,13 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	12
+Release:	13
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
 # Source0-md5:	43cd55ed15f63b5738d620ef9f9fd568
-Source1:	crystalsvg-kde3.tar.bz2
-# Source1-md5:	0d65bc7ec58348cdd57168744cbc3514
+Source1:	http://everaldo.com/crystal/crystal_project.tar.gz
+# Source1-md5:	338dfdb8918e0bb1085bd8109efd71df
 Patch0:		kde-ac260-lt.patch
 Patch1:		kde-common-PLD.patch
 Patch2:		kdelibs-lib_loader.patch
@@ -299,10 +299,10 @@ if [ ! -f installed.stamp ]; then
 	rm -rf $RPM_BUILD_ROOT/etc/
 	rm -f $RPM_BUILD_ROOT%{_bindir}/{artsmessage,checkXML,kgrantpty,ksvgtopng,kunittestmodrunner,makekdewidgets,kconfig_compiler}
 
-	# install compat symlinks to kde3
+	# install actual crystalsvg icons
 	rm -rf $RPM_BUILD_ROOT%{_iconsdir}
 	install -d $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
-	cp -a crystalsvg-kde3/*/ $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
+	cp -a crystal_project/*/ $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
 
 	# remove unwanted boost deps from .la
 	sed -i 's:-lboost_filesystem -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
