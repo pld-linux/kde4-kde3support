@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	13
+Release:	14
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -459,7 +459,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_desktopdir}/kde
 
 # compat links to actual crystalsvg icons from kde4
-%{_iconsdir}/crystalsvg/*/*/*
+%{_iconsdir}/crystalsvg
 
 # 3rdparty directories
 %dir %{_datadir}/services/kconfiguredialog
