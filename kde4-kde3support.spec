@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	14
+Release:	15
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -101,6 +101,9 @@ Requires:	qt >= 6:3.3.3-4
 Requires:	setup >= 2.4.6-7
 Requires:	xorg-app-iceauth
 Obsoletes:	kdelibs
+# for meinproc4 - it's not Requeres on purpose 
+# not everyone needs meinproc4 and not everyone want's kde4 while having kde3 apps
+Suggests:	kde4-kdelibs
 Conflicts:	sim < 0.9.3-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -304,9 +307,14 @@ if [ ! -f installed.stamp ]; then
 	install -d $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
 	cp -a crystal_project/*/ $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
 
+	# remove meinproc binary and link to meinproc4 which works
+	rm -f $RPM_BUILD_ROOT%{_bindir}/meinproc
+	ln -s %{_bindir}/meinproc4 $RPM_BUILD_ROOT%{_bindir}/meinproc
+
 	# remove unwanted boost deps from .la
 	sed -i 's:-lboost_filesystem -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
 	sed -i 's:-lboost_filesystem -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/*.la
+	rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 	touch installed.stamp
 fi
@@ -382,6 +390,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/lnusertemp
 %attr(755,root,root) %{_bindir}/make_driver_db_cups
 %attr(755,root,root) %{_bindir}/make_driver_db_lpr
+# use link to meinproc4
 %attr(755,root,root) %{_bindir}/meinproc
 %attr(755,root,root) %{_bindir}/preparetips
 %attr(4755,root,root) %{_bindir}/start_kdeinit
