@@ -195,6 +195,7 @@ Requires:	qt-devel >= 6:3.3.3-4
 Requires:	xorg-lib-libXmu-devel
 Requires:	xorg-lib-libXt-devel
 %{?with_arts:Obsoletes:	arts-kde-devel}
+Obsoletes:	kdelibs-devel
 Obsoletes:	kdelibs-sound-devel
 Obsoletes:	kdelibs-static
 Obsoletes:	kdelibs2-devel
