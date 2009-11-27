@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	15
+Release:	16
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -307,6 +307,7 @@ if [ ! -f installed.stamp ]; then
 	rm -rf $RPM_BUILD_ROOT%{_iconsdir}
 	install -d $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
 	cp -a crystal_project/*/ $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
+	cp crystal_project/index.theme $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
 
 	# remove meinproc binary and link to meinproc4 which works
 	rm -f $RPM_BUILD_ROOT%{_bindir}/meinproc
@@ -467,8 +468,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/services/rtspu.protocol
 %{_datadir}/servicetypes
 %dir %{_desktopdir}/kde
-
-# compat links to actual crystalsvg icons from kde4
 %{_iconsdir}/crystalsvg
 
 # 3rdparty directories
