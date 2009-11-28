@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	16
+Release:	17
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -168,6 +168,7 @@ Summary:	KDE libraries
 Summary(pl.UTF-8):	Biblioteki KDE
 Group:		Libraries
 Requires:	cups-lib >= 1:1.3.0
+Obsoletes:	kdelibs
 
 %description libs
 KDE libraries.
