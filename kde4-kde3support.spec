@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	18
+Release:	19
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -101,6 +101,7 @@ Requires:	qt >= 6:3.3.3-4
 Requires:	setup >= 2.4.6-7
 Requires:	xorg-app-iceauth
 Obsoletes:	kdelibs
+Obsoletes:	kde4-icons-crystalsvg < 4.3.0
 # for meinproc4 - it's not Requeres on purpose 
 # not everyone needs meinproc4 and not everyone want's kde4 while having kde3 apps
 Suggests:	kde4-kdelibs
