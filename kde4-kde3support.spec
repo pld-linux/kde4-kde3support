@@ -314,6 +314,8 @@ if [ ! -f installed.stamp ]; then
 	# remove meinproc binary and link to meinproc4 which works
 	rm -f $RPM_BUILD_ROOT%{_bindir}/meinproc
 	ln -s %{_bindir}/meinproc4 $RPM_BUILD_ROOT%{_bindir}/meinproc
+	
+	rm -f $RPM_BUILD_ROOT%{_bindir}/preparetips
 
 	# remove unwanted boost deps from .la
 	sed -i 's:-lboost_filesystem -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
@@ -396,7 +398,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/make_driver_db_lpr
 # use link to meinproc4
 %attr(755,root,root) %{_bindir}/meinproc
-%attr(755,root,root) %{_bindir}/preparetips
+# use preparetips from kde 4.4
+#%attr(755,root,root) %{_bindir}/preparetips
 %attr(4755,root,root) %{_bindir}/start_kdeinit
 %attr(755,root,root) %{_bindir}/start_kdeinit_wrapper
 
