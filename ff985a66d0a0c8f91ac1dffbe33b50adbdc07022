@@ -1,0 +1,2 @@
+- /usr/bin/ install preparetips with kde4-kdelibs-4.3.85-1.x86_64 is in
+  conflict with a file from the package, kde4-kde3support-3.5.10-15.x86_64
