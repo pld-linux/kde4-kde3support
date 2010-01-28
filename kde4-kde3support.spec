@@ -655,9 +655,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libvcard.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libvcard.so.0
 
-# 3rdparty directories
-%dir %{_libdir}/kconf_update_bin
-
 # merged kabc files
 %attr(755,root,root) %{_libdir}/kde3/kabc_dir.so
 %attr(755,root,root) %{_libdir}/kde3/kabc_file.so
