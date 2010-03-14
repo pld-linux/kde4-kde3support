@@ -269,6 +269,7 @@ export path_sudo=%{_bindir}/sudo
 	--oldincludedir=%{_includedir}/kde3
 
 %{__make}
+rm -f makeinstall.stamp
 
 %install
 rm -rf $RPM_BUILD_ROOT
