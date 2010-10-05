@@ -162,3 +162,47 @@ diff -urN kdelibs-3.5.10/kio/kssl/kopenssl.h kdelibs-3.5.12/kio/kssl/kopenssl.h
     /*
      *  
      */
+diff -urN kdelibs-3.5.10/kio/kssl/ksslcertificate.cc kdelibs-3.5.12/kio/kssl/ksslcertificate.cc
+--- kdelibs-3.5.10/kio/kssl/ksslcertificate.cc	2006-01-19 18:06:12.000000000 +0100
++++ kdelibs-3.5.12/kio/kssl/ksslcertificate.cc	2010-09-29 07:28:27.000000000 +0200
+@@ -1000,17 +1000,31 @@
+ QByteArray KSSLCertificate::toNetscape() {
+ QByteArray qba;
+ #ifdef KSSL_HAVE_SSL
+-ASN1_HEADER ah;
+-ASN1_OCTET_STRING os;
+-KTempFile ktf;
++#if OPENSSL_VERSION_NUMBER >= 0x10000000L
++	NETSCAPE_X509 nx;
++	ASN1_OCTET_STRING hdr;
++#else
++   ASN1_HEADER ah;
++   ASN1_OCTET_STRING os;
++#endif
++	KTempFile ktf;
+ 
+-	os.data = (unsigned char *)NETSCAPE_CERT_HDR;
+-	os.length = strlen(NETSCAPE_CERT_HDR);
+-	ah.header = &os;
+-	ah.data = (char *)getCert();
+-	ah.meth = d->kossl->X509_asn1_meth();
++#if OPENSSL_VERSION_NUMBER >= 0x10000000L
++	hdr.data = (unsigned char *)NETSCAPE_CERT_HDR;
++	hdr.length = strlen(NETSCAPE_CERT_HDR);
++	nx.header = &hdr;
++	nx.cert = getCert();
+ 
+-	d->kossl->ASN1_i2d_fp(ktf.fstream(),(unsigned char *)&ah);
++	d->kossl->ASN1_i2d_fp(ktf.fstream(),(unsigned char *)&nx);
++#else
++   os.data = (unsigned char *)NETSCAPE_CERT_HDR;
++   os.length = strlen(NETSCAPE_CERT_HDR);
++   ah.header = &os;
++   ah.data = (char *)getCert();
++   ah.meth = d->kossl->X509_asn1_meth();
++
++   d->kossl->ASN1_i2d_fp(ktf.fstream(),(unsigned char *)&ah);
++#endif
+ 
+ 	ktf.close();
+ 
