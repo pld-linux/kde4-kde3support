@@ -34,6 +34,7 @@ Patch5:		kdelibs-gcc4.patch
 Patch6:		%{name}-ac.patch
 Patch7:		crystalsvg-theme_index.patch
 Patch8:		openssl1.patch
+Patch9:		%{name}-qt4.patch
 URL:		http://www.kde.org/
 BuildRequires:	OpenEXR-devel >= 1.4.0.a
 BuildRequires:	acl-devel
@@ -237,6 +238,7 @@ KDE.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 mv -f configure{,.dist}
 
