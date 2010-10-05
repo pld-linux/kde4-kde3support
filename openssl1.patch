@@ -209,13 +209,11 @@ diff -urN kdelibs-3.5.10/kio/kssl/ksslcertificate.cc kdelibs-3.5.12/kio/kssl/kss
 diff -urN kdelibs-3.5.10/kio/kssl/ksmimecrypto.cc kdelibs-3.5.12/kio/kssl/ksmimecrypto.cc
 --- kdelibs-3.5.10/kio/kssl/ksmimecrypto.cc	2005-10-10 17:05:44.000000000 +0200
 +++ kdelibs-3.5.12/kio/kssl/ksmimecrypto.cc	2010-09-02 23:52:23.000000000 +0200
-@@ -86,8 +86,8 @@
- }
+@@ -86,7 +86,7 @@
  
  
--STACK_OF(X509) *KSMIMECryptoPrivate::certsToX509(QPtrList<KSSLCertificate> &certs) {
+ STACK_OF(X509) *KSMIMECryptoPrivate::certsToX509(QPtrList<KSSLCertificate> &certs) {
 -    STACK_OF(X509) *x509 = sk_new(NULL);
-+STACK_OF(X509) *KSMIMECryptoPrivate::certsToX509(TQPtrList<KSSLCertificate> &certs) {
 +    STACK_OF(X509) *x509 = reinterpret_cast<STACK_OF(X509)*>(sk_new(NULL));
      KSSLCertificate *cert = certs.first();
      while(cert) {
