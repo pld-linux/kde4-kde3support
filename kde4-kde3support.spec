@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	31
+Release:	32
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -103,9 +103,10 @@ Requires:	libxml2-progs
 Requires:	qt >= 6:3.3.3-4
 Requires:	setup >= 2.4.6-7
 Requires:	xorg-app-iceauth
-Obsoletes:	kdelibs
+Provides:	kdelibs = 9:%{version}-%{release}
 Obsoletes:	kde4-icons-crystalsvg < 4.3.0
-# for meinproc4 - it's not Requeres on purpose 
+Obsoletes:	kdelibs < 9:%{version}-%{release}
+# for meinproc4 - it's not Requeres on purpose
 # not everyone needs meinproc4 and not everyone want's kde4 while having kde3 apps
 Suggests:	kde4-kdelibs
 Conflicts:	sim < 0.9.3-4
@@ -321,7 +322,7 @@ if [ ! -f installed.stamp ]; then
 	# remove meinproc binary and link to meinproc4 which works
 	rm -f $RPM_BUILD_ROOT%{_bindir}/meinproc
 	ln -s %{_bindir}/meinproc4 $RPM_BUILD_ROOT%{_bindir}/meinproc
-	
+
 	rm -f $RPM_BUILD_ROOT%{_bindir}/preparetips
 
 	# remove unwanted boost deps from .la
