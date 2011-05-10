@@ -9,17 +9,17 @@
 %define		_state		stable
 %define		origname	kdelibs
 %define     artsver     13:1.5.10
-Summary:	K Desktop Environment - libraries
-Summary(es.UTF-8):	K Desktop Environment - bibliotecas
-Summary(ko.UTF-8):	KDE - 라이브러리
-Summary(pl.UTF-8):	K Desktop Environment - biblioteki
-Summary(pt_BR.UTF-8):	Bibliotecas de fundação do KDE
-Summary(ru.UTF-8):	K Desktop Environment - Библиотеки
-Summary(uk.UTF-8):	K Desktop Environment - Бібліотеки
+Summary:	K Desktop Environment 3 libraries
+Summary(es.UTF-8):	K Desktop Environment 3 - bibliotecas
+Summary(ko.UTF-8):	KDE 3 - 라이브러리
+Summary(pl.UTF-8):	Biblioteki K Desktop Environment 3
+Summary(pt_BR.UTF-8):	Bibliotecas de fundação do KDE 3
+Summary(ru.UTF-8):	K Desktop Environment 3 - Библиотеки
+Summary(uk.UTF-8):	K Desktop Environment 3 - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	32
-License:	LGPL
+Release:	33
+License:	LGPL v2
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
 # Source0-md5:	43cd55ed15f63b5738d620ef9f9fd568
@@ -120,7 +120,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This package includes libraries that are central to the development
-and execution of a KDE program, misc HTML documentation and theme
+and execution of a KDE 3 programs, misc HTML documentation and theme
 modules.
 
 Included in this package are among others:
@@ -130,11 +130,12 @@ Included in this package are among others:
 - kwallet - KDE password manager.
 
 %description -l es.UTF-8
-Bibliotecas para KDE.
+Bibliotecas para KDE 3.
 
 %description -l pl.UTF-8
 Ten pakiet zawiera biblioteki potrzebne do rozwijania i uruchamiania
-aplikacji KDE, różną dokumentację oraz moduły z motywami wyglądu KDE.
+aplikacji KDE 3, różną dokumentację oraz moduły z motywami wyglądu
+KDE.
 
 Pakiet ten zawiera między innymi:
 - kdecore - podstawową bibliotekę KDE,
@@ -143,11 +144,11 @@ Pakiet ten zawiera między innymi:
 - kwallet - system zarządzania hasłami w KDE.
 
 %description -l pt_BR.UTF-8
-Bibliotecas de fundação do KDE requeridas por todo e qualquer
+Bibliotecas de fundação do KDE 3 requeridas por todo e qualquer
 aplicativo KDE.
 
 %description -l ru.UTF-8
-Библиотеки для K Desktop Environment.
+Библиотеки для K Desktop Environment 3.
 
 Включены библиотеки KDE:
 - jscript (javascript),
@@ -158,7 +159,7 @@ aplicativo KDE.
 - kspell (проверка орфографии),
 
 %description -l uk.UTF-8
-Бібліотеки для K Desktop Environment.
+Бібліотеки для K Desktop Environment 3.
 
 Включені такі бібліотеки KDE:
 - jscript (javascript),
@@ -169,24 +170,24 @@ aplicativo KDE.
 - kspell (перевірка орфографії),
 
 %package libs
-Summary:	KDE libraries
-Summary(pl.UTF-8):	Biblioteki KDE
+Summary:	KDE 3 libraries
+Summary(pl.UTF-8):	Biblioteki KDE 3
 Group:		Libraries
 Requires:	cups-lib >= 1:1.3.0
 Obsoletes:	kdelibs-libs
 
 %description libs
-KDE libraries.
+KDE 3 libraries.
 
 %description libs -l pl.UTF-8
-Biblioteki KDE.
+Biblioteki KDE 3.
 
 %package devel
-Summary:	kdelibs - header files and development documentation
-Summary(pl.UTF-8):	kdelibs - pliki nagłówkowe i dokumentacja do kdelibs
-Summary(pt_BR.UTF-8):	Arquivos de inclusão e documentação para compilar aplicativos KDE
-Summary(ru.UTF-8):	Хедеры и документация для компилляции программ KDE
-Summary(uk.UTF-8):	Хедери та документація для компіляції програм KDE
+Summary:	kdelibs 3 - header files and development documentation
+Summary(pl.UTF-8):	kdelibs 3 - pliki nagłówkowe i dokumentacja do kdelibs
+Summary(pt_BR.UTF-8):	Arquivos de inclusão e documentação para compilar aplicativos KDE 3
+Summary(ru.UTF-8):	Хедеры и документация для компилляции программ KDE 3
+Summary(uk.UTF-8):	Хедери та документація для компіляції програм KDE 3
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	acl-devel
@@ -302,33 +303,33 @@ if [ ! -f installed.stamp ]; then
 	install -d $RPM_BUILD_ROOT%{_includedir}
 	mv $RPM_BUILD_ROOT/kde3inc $RPM_BUILD_ROOT%{_includedir}/kde3
 	# packaged by hicolor-icon-theme
-	rm $RPM_BUILD_ROOT%{_iconsdir}/hicolor/index.theme
+	%{__rm} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/index.theme
 
 	# remove *.la for dynamic plugins. kde lib loader handles .so now.
-	rm $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
+	%{__rm} $RPM_BUILD_ROOT%{_libdir}/kde3/*.la
 	# keep $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidget.la for kdebase and others.
-	rm $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/styles/*.la
-	rm $RPM_BUILD_ROOT%{_libdir}/libkdeinit_*.la
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/{apps,doc,locale,config,emoticons}
-	rm -rf $RPM_BUILD_ROOT/etc/
-	rm -f $RPM_BUILD_ROOT%{_bindir}/{artsmessage,checkXML,kgrantpty,ksvgtopng,kunittestmodrunner,makekdewidgets,kconfig_compiler}
+	%{__rm} $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/styles/*.la
+	%{__rm} $RPM_BUILD_ROOT%{_libdir}/libkdeinit_*.la
+	%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{apps,doc,locale,config,emoticons}
+	%{__rm} -r $RPM_BUILD_ROOT/etc
+	%{?with_arts:%{__rm} $RPM_BUILD_ROOT%{_bindir}/artsmessage}
+	%{__rm} $RPM_BUILD_ROOT%{_bindir}/{checkXML,kgrantpty,ksvgtopng,kunittestmodrunner,makekdewidgets,kconfig_compiler}
 
 	# install actual crystalsvg icons
-	rm -rf $RPM_BUILD_ROOT%{_iconsdir}
+	%{__rm} -r $RPM_BUILD_ROOT%{_iconsdir}
 	install -d $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
 	cp -a crystal_project/*/ $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
-	cp crystal_project/index.theme $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
+	cp -p crystal_project/index.theme $RPM_BUILD_ROOT%{_iconsdir}/crystalsvg
 
 	# remove meinproc binary and link to meinproc4 which works
-	rm -f $RPM_BUILD_ROOT%{_bindir}/meinproc
+	%{__rm} $RPM_BUILD_ROOT%{_bindir}/meinproc
 	ln -s %{_bindir}/meinproc4 $RPM_BUILD_ROOT%{_bindir}/meinproc
 
-	rm -f $RPM_BUILD_ROOT%{_bindir}/preparetips
+	%{__rm} $RPM_BUILD_ROOT%{_bindir}/preparetips
 
 	# remove unwanted boost deps from .la
-	sed -i 's:-lboost_filesystem -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
-	sed -i 's:-lboost_filesystem -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/*.la
-	rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+	sed -i 's:-lboost_filesystem -lboost_system -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
+	%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 	touch installed.stamp
 fi
@@ -338,10 +339,11 @@ cd $RPM_BUILD_ROOT%{_libdir}
 for link in $(ls *.so); do
 	sover=$(ls $link.*.*.* | sed -e s@$link@@)
 	if [ -h $link ]; then
-		rm -f $link
+		%{__rm} $link
 		ln -s ../$link$sover kde3dev/$link
 	fi
 done
+mv libkdefakes_nonpic.a kde3dev
 cd -
 
 %clean
@@ -677,85 +679,46 @@ rm -rf $RPM_BUILD_ROOT
 #%attr(755,root,root) %{_bindir}/kconfig_compiler
 %{_includedir}/kde3
 #%{_libdir}/kde3/plugins/designer/kdewidgets.la
-#%{_libdir}/libDCOP.la
 %dir %{_libdir}/kde3dev
 %attr(755,root,root) %{_libdir}/kde3dev/libDCOP.so
 %if %{with arts}
-#%{_libdir}/libartskde.la
 %attr(755,root,root) %{_libdir}/kde3dev/libartskde.so
 %endif
-#%{_libdir}/libkabc.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkabc.so
-#%{_libdir}/libkabc_dir.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkabc_dir.so
-#%{_libdir}/libkabc_file.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkabc_file.so
-#%{_libdir}/libkabc_ldapkio.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkabc_ldapkio.so
-#%{_libdir}/libkatepartinterfaces.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkatepartinterfaces.so
-#%{_libdir}/libkdecore.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdecore.so
-#%{_libdir}/libkdefakes.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdefakes.so
-#%{_libdir}/libkdefakes_nonpic.a
-#%{_libdir}/libkdefx.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdefx.so
-#%{_libdir}/libkdeprint.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdeprint.so
-#%{_libdir}/libkdeprint_management.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdeprint_management.so
-#%{_libdir}/libkdesasl.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdesasl.so
-#%{_libdir}/libkdesu.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdesu.so
-#%{_libdir}/libkdeui.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdeui.so
-#%{_libdir}/libkdnssd.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkdnssd.so
-#%{_libdir}/libkhtml.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkhtml.so
-#%{_libdir}/libkimproxy.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkimproxy.so
-#%{_libdir}/libkio.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkio.so
-#%{_libdir}/libkjava.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkjava.so
-#%{_libdir}/libkjs.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkjs.so
-#%{_libdir}/libkmdi.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkmdi.so
-#%{_libdir}/libkmdi2.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkmdi2.so
-#%{_libdir}/libkmediaplayer.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkmediaplayer.so
-#%{_libdir}/libkmid.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkmid.so
-#%{_libdir}/libknewstuff.la
 %attr(755,root,root) %{_libdir}/kde3dev/libknewstuff.so
-#%{_libdir}/libkntlm.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkntlm.so
-#%{_libdir}/libkparts.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkparts.so
-#%{_libdir}/libkresources.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkresources.so
-#%{_libdir}/libkscreensaver.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkscreensaver.so
-#%{_libdir}/libkscript.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkscript.so
-#%{_libdir}/libkspell.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkspell.so
-#%{_libdir}/libkspell2.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkspell2.so
-#%{_libdir}/libktexteditor.la
 %attr(755,root,root) %{_libdir}/kde3dev/libktexteditor.so
-#%{_libdir}/libkunittest.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkunittest.so
-#%{_libdir}/libkutils.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkutils.so
-#%{_libdir}/libkwalletbackend.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkwalletbackend.so
-#%{_libdir}/libkwalletclient.la
 %attr(755,root,root) %{_libdir}/kde3dev/libkwalletclient.so
-#%{_libdir}/libvcard.la
 %attr(755,root,root) %{_libdir}/kde3dev/libvcard.so
+%{_libdir}/kde3dev/libkdefakes_nonpic.a
