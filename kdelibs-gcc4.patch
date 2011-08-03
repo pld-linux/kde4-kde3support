@@ -21,3 +21,13 @@
    if ( !start || sscanf(start, "|||%d|", &portnum) != 1)
      return ERR_INTERNAL;
  
+--- kdelibs-3.5.10/kdeprint/cups/cupsdconf2/cups-util.c~	2007-10-08 11:52:10.000000000 +0200
++++ kdelibs-3.5.10/kdeprint/cups/cupsdconf2/cups-util.c	2011-08-03 12:48:35.120781904 +0200
+@@ -1,6 +1,7 @@
+ #include <cups/ipp.h>
+ #include <cups/http.h>
+ #include <cups/cups.h>
++#include <stdio.h>
+ #include <stdlib.h>
+ #include <fcntl.h>
+ #include <sys/stat.h>
