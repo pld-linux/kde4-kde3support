@@ -1,0 +1,20 @@
+--- kdelibs-3.5.10/kdecore/klibloader.cpp.orig	2012-07-11 11:33:20.950241266 +0200
++++ kdelibs-3.5.10/kdecore/klibloader.cpp	2012-07-11 11:34:19.250239206 +0200
+@@ -331,7 +331,7 @@
+     d = 0L;
+ }
+ 
+-#define BOOST_FILESYSTEM_VERSION 2
++#define BOOST_FILESYSTEM_VERSION 3
+ #include <boost/filesystem/exception.hpp>
+ #include <boost/filesystem/operations.hpp>
+ #include <boost/filesystem/path.hpp>
+@@ -350,7 +350,7 @@
+ 			i != boost::filesystem::directory_iterator(); ++i )
+ 		{
+ 			boost::smatch m;
+-			if ( boost::regex_match( i->string(), m, re ) )
++			if ( boost::regex_match( i->path().string(), m, re ) )
+ 				return m.str().c_str();
+ 		}
+ 	}
