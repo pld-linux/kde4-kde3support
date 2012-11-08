@@ -116,6 +116,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # confuses OpenEXR detection
 %undefine	configure_cache
 
+# kde3 does not work well with ccache (CC with spaces)
+%unglobal	with_ccache
+
 %define		no_install_post_check_so	1
 # unresolved symbols in libkscreensaver.so.X (by design)
 
@@ -332,6 +335,7 @@ if [ ! -f installed.stamp ]; then
 	# remove unwanted boost deps from .la
 	sed -i 's:-lboost_filesystem -lboost_system -lboost_regex::' $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
 	%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+	%{__rm} $RPM_BUILD_ROOT%{_libdir}/kde3/plugins/designer/kdewidgets.la
 
 	touch installed.stamp
 fi
