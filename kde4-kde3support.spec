@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment 3 - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment 3 - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	40
+Release:	41
 License:	LGPL v2
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -401,12 +401,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/kioexec
 %attr(755,root,root) %{_bindir}/kioslave
 %attr(755,root,root) %{_bindir}/klauncher
-%attr(755,root,root) %{_bindir}/kmailservice
+# use kmailservice from kde 4.10
+#%attr(755,root,root) %{_bindir}/kmailservice
 %attr(755,root,root) %{_bindir}/kpac_dhcp_helper
 %attr(755,root,root) %{_bindir}/ksendbugmail
 %attr(755,root,root) %{_bindir}/kshell
 %attr(755,root,root) %{_bindir}/kstartupconfig
-%attr(755,root,root) %{_bindir}/ktelnetservice
+# use ktelnetservice from kde 4.10
+#%attr(755,root,root) %{_bindir}/ktelnetservice
 %attr(755,root,root) %{_bindir}/ktradertest
 %attr(755,root,root) %{_bindir}/kwrapper
 %attr(755,root,root) %{_bindir}/lnusertemp
