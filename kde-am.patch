@@ -9,3 +9,129 @@
      echo "*** $AUTOMAKE_STRING found."
      UNSERMAKE=no
      ;;
+--- kdelibs-3.5.10/admin/configure.in.min~	2013-04-04 21:57:22.468489671 +0200
++++ kdelibs-3.5.10/admin/configure.in.min	2013-04-04 22:02:56.099614223 +0200
+@@ -41,7 +41,7 @@
+ KDE_SET_PREFIX
+ 
+ dnl generate the config header
+-AM_CONFIG_HEADER(config.h) dnl at the distribution this done
++AC_CONFIG_HEADERS(config.h) dnl at the distribution this done
+ 
+ dnl Checks for programs.
+ AC_PROG_CC
+--- kdelibs-3.5.10/admin/cvs.sh~	2013-04-04 21:57:22.465156305 +0200
++++ kdelibs-3.5.10/admin/cvs.sh	2013-04-04 22:03:44.983443327 +0200
+@@ -128,7 +128,7 @@
+ echo "*** Creating configure"
+ call_and_fix_autoconf
+ 
+-if egrep "^AM_CONFIG_HEADER" configure.in >/dev/null 2>&1; then
++if egrep "^AC_CONFIG_HEADERS" configure.in >/dev/null 2>&1; then
+   echo "*** Creating config.h template"
+   $AUTOHEADER || exit 1
+   touch config.h.in
+@@ -184,7 +184,7 @@
+   fi
+ fi
+ $ACLOCAL $ACLOCALFLAGS
+-if egrep "^AM_CONFIG_HEADER" configure.in >/dev/null 2>&1; then
++if egrep "^AC_CONFIG_HEADERS" configure.in >/dev/null 2>&1; then
+   echo "*** Creating config.h template"
+   $AUTOHEADER || exit 1
+   touch config.h.in
+--- kdelibs-3.5.10/kio/kssl/configure.in.in~	2005-09-10 10:26:49.000000000 +0200
++++ kdelibs-3.5.10/kio/kssl/configure.in.in	2013-04-04 22:04:18.503783179 +0200
+@@ -4,4 +4,4 @@
+ 	AC_DEFINE(KSSL_HAVE_SSL, 1, [Define if we shall use KSSL])
+ fi
+ 
+-AM_CONFIG_HEADER([kio/kssl/ksslconfig.h])
++AC_CONFIG_HEADERS([kio/kssl/ksslconfig.h])
+--- kdelibs-3.5.10/configure.in~	2008-08-20 18:05:03.000000000 +0200
++++ kdelibs-3.5.10/configure.in	2013-04-04 22:04:57.840848814 +0200
+@@ -26,7 +26,7 @@
+ AC_PROG_INSTALL
+ 
+ dnl generate the config header
+-AM_CONFIG_HEADER(config.h) dnl at the distribution this done
++AC_CONFIG_HEADERS(config.h) dnl at the distribution this done
+ 
+ dnl Checks for programs.
+ AC_CHECK_COMPILERS
+@@ -500,7 +500,7 @@
+ fi
+ 
+ AC_DEFINE_UNQUOTED(DCOP_PATH, ["${dcop_prefix}/bin"], [Define where your dcop binary is])
+-AM_CONFIG_HEADER([dcop/dcop-path.h])
++AC_CONFIG_HEADERS([dcop/dcop-path.h])
+ 
+ AC_PATH_PROGS(MD5SUM, [md5sum gmd5sum], [md5sum])
+ dnl =======================================================
+@@ -813,7 +813,7 @@
+ 
+ dnl AC_OUTPUT(kdecore/kde-config.cpp)
+ 
+-AM_CONFIG_HEADER(kdecore/kdemacros.h)
++AC_CONFIG_HEADERS(kdecore/kdemacros.h)
+ 
+ SVGICONS=
+ 	
+@@ -1735,7 +1735,7 @@
+ 	AC_DEFINE(KSSL_HAVE_SSL, 1, [Define if we shall use KSSL])
+ fi
+ 
+-AM_CONFIG_HEADER([kio/kssl/ksslconfig.h])
++AC_CONFIG_HEADERS([kio/kssl/ksslconfig.h])
+ dnl =======================================================
+ dnl FILE: ./kio/misc/kpac/configure.in.in
+ dnl =======================================================
+@@ -2000,7 +2000,7 @@
+ AC_SUBST(LIBPCRE)
+ AC_SUBST(PCRECFLAGS)
+ 
+-AM_CONFIG_HEADER([kjs/global.h])
++AC_CONFIG_HEADERS([kjs/global.h])
+ dnl =======================================================
+ dnl FILE: ./kspell2/plugins/configure.in.in
+ dnl =======================================================
+--- kdelibs-3.5.10/configure.in.in~	2013-04-04 21:57:22.468489671 +0200
++++ kdelibs-3.5.10/configure.in.in	2013-04-04 22:05:57.668122592 +0200
+@@ -22,7 +22,7 @@
+ AC_PROG_INSTALL
+ 
+ dnl generate the config header
+-AM_CONFIG_HEADER(config.h) dnl at the distribution this done
++AC_CONFIG_HEADERS(config.h) dnl at the distribution this done
+ 
+ dnl Checks for programs.
+ AC_PROG_CC
+--- kdelibs-3.5.10/kjs/configure.in.in~	2007-10-08 11:52:09.000000000 +0200
++++ kdelibs-3.5.10/kjs/configure.in.in	2013-04-04 22:06:19.065006325 +0200
+@@ -90,4 +90,4 @@
+ AC_SUBST(LIBPCRE)
+ AC_SUBST(PCRECFLAGS)
+ 
+-AM_CONFIG_HEADER([kjs/global.h])
++AC_CONFIG_HEADERS([kjs/global.h])
+--- kdelibs-3.5.10/dcop/configure.in.in~	2005-09-10 10:27:23.000000000 +0200
++++ kdelibs-3.5.10/dcop/configure.in.in	2013-04-04 22:06:33.691821354 +0200
+@@ -4,6 +4,6 @@
+ fi
+ 
+ AC_DEFINE_UNQUOTED(DCOP_PATH, ["${dcop_prefix}/bin"], [Define where your dcop binary is])
+-AM_CONFIG_HEADER([dcop/dcop-path.h])
++AC_CONFIG_HEADERS([dcop/dcop-path.h])
+ 
+ AC_PATH_PROGS(MD5SUM, [md5sum gmd5sum], [md5sum])
+--- kdelibs-3.5.10/kdecore/configure.in.in~	2007-05-14 09:52:39.000000000 +0200
++++ kdelibs-3.5.10/kdecore/configure.in.in	2013-04-04 22:07:00.152089704 +0200
+@@ -169,7 +169,7 @@
+ 
+ dnl AC_OUTPUT(kdecore/kde-config.cpp)
+ 
+-AM_CONFIG_HEADER(kdecore/kdemacros.h)
++AC_CONFIG_HEADERS(kdecore/kdemacros.h)
+ 
+ SVGICONS=
+ 	
