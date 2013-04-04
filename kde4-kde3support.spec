@@ -248,6 +248,7 @@ KDE.
 %patch10 -p1
 
 mv -f configure{,.dist}
+:>admin/test-driver
 
 %build
 # merge cacert root certificate
