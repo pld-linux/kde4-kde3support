@@ -78,7 +78,7 @@ BuildRequires:	libxml2-progs
 BuildRequires:	libxslt-devel >= 1.0.7
 BuildRequires:	lua50-devel
 BuildRequires:	mdns-bonjour-devel
-BuildRequires:	openmotif-devel
+BuildRequires:	motif-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pcre-devel >= 3.5
 BuildRequires:	pkgconfig
