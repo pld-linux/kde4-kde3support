@@ -18,7 +18,7 @@ Summary(ru.UTF-8):	K Desktop Environment 3 - Библиотеки
 Summary(uk.UTF-8):	K Desktop Environment 3 - Бібліотеки
 Name:		kde4-kde3support
 Version:	3.5.10
-Release:	48
+Release:	49
 License:	LGPL v2
 Group:		X11/Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{origname}-%{version}.tar.bz2
@@ -37,6 +37,7 @@ Patch8:		openssl1.patch
 Patch9:		%{name}-qt4.patch
 Patch10:	boost-1.50.patch
 Patch11:	kdelibs-cups16.patch
+Patch12:	kdelibs-cups2.patch
 URL:		http://www.kde.org/
 BuildRequires:	OpenEXR-devel >= 1.4.0.a
 BuildRequires:	acl-devel
@@ -248,6 +249,7 @@ KDE.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
 
 mv -f configure{,.dist}
 :>admin/test-driver
