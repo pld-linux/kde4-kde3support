@@ -1,0 +1,21 @@
+diff -up kdelibs-3.5.10/kate/part/katebuffer.cpp.than kdelibs-3.5.10/kate/part/katebuffer.cpp
+--- kdelibs-3.5.10/kate/part/katebuffer.cpp.than	2016-02-16 22:06:01.830197908 +0100
++++ kdelibs-3.5.10/kate/part/katebuffer.cpp	2016-02-16 23:33:15.810136589 +0100
+@@ -42,6 +42,8 @@
+ #include <qcstring.h>
+ #include <qdatetime.h>
+ 
++#include <cmath>
++
+ /**
+  * loader block size, load 256 kb at once per default
+  * if file size is smaller, fall back to file size
+@@ -917,7 +919,7 @@ void KateBuffer::updatePreviousNotEmptyL
+   } while (textLine->firstChar()==-1);
+   kdDebug(13020)<<"updatePreviousNotEmptyLine: updating line:"<<(blk->startLine()+current_line)<<endl;
+   QMemArray<uint> foldingList=textLine->foldingListArray();
+-  while ( (foldingList.size()>0)  && ( abs(foldingList[foldingList.size()-2])==1)) {
++  while ( (foldingList.size()>0)  && ( std::abs(foldingList[foldingList.size()-2])==1)) {
+     foldingList.resize(foldingList.size()-2,QGArray::SpeedOptim);
+   }
+   addIndentBasedFoldingInformation(foldingList,addindent,deindent);

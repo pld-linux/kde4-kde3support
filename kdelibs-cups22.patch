@@ -1,0 +1,11 @@
+diff -ur kdelibs-3.5.10/kdeprint/cups/cupsaddsmb2.cpp kdelibs-3.5.10-cups22/kdeprint/cups/cupsaddsmb2.cpp
+--- kdelibs-3.5.10/kdeprint/cups/cupsaddsmb2.cpp	2005-10-10 17:06:30.000000000 +0200
++++ kdelibs-3.5.10-cups22/kdeprint/cups/cupsaddsmb2.cpp	2016-09-28 19:23:09.264863318 +0200
+@@ -39,6 +39,7 @@
+ #include <kstdguiitem.h>
+ 
+ #include <cups/cups.h>
++#include <cups/ppd.h>
+ #include <ctype.h>
+ 
+ CupsAddSmb::CupsAddSmb(QWidget *parent, const char *name)
