@@ -19,3 +19,38 @@ diff -up kdelibs-3.5.10/kate/part/katebuffer.cpp.than kdelibs-3.5.10/kate/part/k
      foldingList.resize(foldingList.size()-2,QGArray::SpeedOptim);
    }
    addIndentBasedFoldingInformation(foldingList,addindent,deindent);
+--- kdelibs-3.5.10/kdecore/network/kserversocket.cpp~	2005-09-10 10:27:10.000000000 +0200
++++ kdelibs-3.5.10/kdecore/network/kserversocket.cpp	2017-03-05 01:18:43.529185795 +0100
+@@ -292,7 +292,7 @@
+ 	}
+       else if (!listen())
+ 	// error happened during listen
+-	return false;
++	return NULL;
+     }
+ 
+   // check to see if we're doing a timeout
+--- kdelibs-3.5.10/acinclude.m4~	2017-03-05 01:16:57.000000000 +0100
++++ kdelibs-3.5.10/acinclude.m4	2017-03-05 01:23:49.733489472 +0100
+@@ -2168,9 +2168,6 @@
+ save_CXXFLAGS="$CXXFLAGS"
+ kde_safe_LIBS="$LIBS"
+ LIBS="$LIBS $X_EXTRA_LIBS"
+-if test "$GXX" = "yes"; then
+-CXXFLAGS="$CXXFLAGS -pedantic-errors"
+-fi
+ AC_TRY_COMPILE([
+ $2
+ ],
+--- kdelibs-3.5.10/admin/acinclude.m4.in~	2017-03-05 01:25:23.000000000 +0100
++++ kdelibs-3.5.10/admin/acinclude.m4.in	2017-03-05 01:27:21.469832283 +0100
+@@ -2168,9 +2168,6 @@
+ save_CXXFLAGS="$CXXFLAGS"
+ kde_safe_LIBS="$LIBS"
+ LIBS="$LIBS $X_EXTRA_LIBS"
+-if test "$GXX" = "yes"; then
+-CXXFLAGS="$CXXFLAGS -pedantic-errors"
+-fi
+ AC_TRY_COMPILE([
+ $2
+ ],

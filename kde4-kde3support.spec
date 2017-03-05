@@ -273,6 +273,7 @@ if [ ! -f configure ]; then
 fi
 
 export path_sudo=%{_bindir}/sudo
+export CXXFLAGS="%{rpmcxxflags} -Wno-narrowing"
 %configure \
 	--%{?debug:en}%{!?debug:dis}able-debug%{?debug:=full} \
 	%{!?debug:--disable-rpath} \
