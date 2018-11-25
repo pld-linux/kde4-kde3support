@@ -270,6 +270,10 @@ cd kio/kssl/kssl
 ./mergelocal
 cd -
 
+cd kabc/scripts
+./makeaddressee
+cd -
+
 cp /usr/share/automake/config.sub admin
 export kde_htmldir=%{_kdedocdir}
 export kde_libs_htmldir=%{_kdedocdir}
@@ -286,6 +290,9 @@ export CXXFLAGS="%{rpmcxxflags} -Wno-narrowing"
 	%{?with_hidden_visibility:--enable-gcc-hidden-visibility} \
 %if "%{_lib}" == "lib64"
 	--enable-libsuffix=64 \
+%endif
+%if "%{_lib}" == "libx32"
+	--enable-libsuffix=x32 \
 %endif
 	--enable-mitshm \
 	--with%{!?with_alsa:out}-alsa \
