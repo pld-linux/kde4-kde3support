@@ -41,6 +41,8 @@ Patch11:	kdelibs-cups16.patch
 Patch12:	kdelibs-cups20.patch
 Patch13:	kdelibs-cups22.patch
 Patch14:	gcc6.patch
+Patch15:	gcc7.patch
+Patch16:	openssl-1.1.patch
 URL:		http://www.kde.org/
 BuildRequires:	OpenEXR-devel >= 1.4.0.a
 BuildRequires:	acl-devel
@@ -93,6 +95,7 @@ BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpmbuild(macros) >= 1.129
 #BuildRequires:	unsermake >= 040511
 BuildRequires:	zlib-devel
+BuildRequires:	zstd-devel
 %if %{with autoreqdep}
 BuildConflicts:	kdebase-core < 9:3.4.0
 BuildConflicts:	kdepim-korganizer-libs
@@ -255,6 +258,8 @@ KDE.
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
+%patch16 -p1
 
 mv -f configure{,.dist}
 :>admin/test-driver
