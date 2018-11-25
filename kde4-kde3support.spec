@@ -43,6 +43,7 @@ Patch13:	kdelibs-cups22.patch
 Patch14:	gcc6.patch
 Patch15:	gcc7.patch
 Patch16:	openssl-1.1.patch
+Patch17:	x32.patch
 URL:		http://www.kde.org/
 BuildRequires:	OpenEXR-devel >= 1.4.0.a
 BuildRequires:	acl-devel
@@ -260,6 +261,7 @@ KDE.
 %patch14 -p1
 %patch15 -p1
 %patch16 -p1
+%patch17 -p1
 
 mv -f configure{,.dist}
 :>admin/test-driver

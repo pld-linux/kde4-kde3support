@@ -1,0 +1,46 @@
+--- kdelibs-3.5.10/admin/libtool.m4.in~	2018-11-25 17:12:01.000000000 +0100
++++ kdelibs-3.5.10/admin/libtool.m4.in	2018-11-25 17:53:09.819409957 +0100
+@@ -498,6 +498,10 @@
+     *32-bit*)
+       LINUX_64_MODE="32"
+       case $host in
++        x86_64-*linux*gnux32)
++          LINUX_64_MODE="x32"
++	  LD="${LD-ld} -m elf32_x86_64"
++	  ;;
+         x86_64-*linux*)
+           LD="${LD-ld} -m elf_i386"
+           ;;
+@@ -1428,6 +1432,9 @@
+       libsuff=64
+     fi
+   fi
++  if test "x$LINUX_64_MODE" = x32; then
++    libsuff=x32
++  fi
+   shlibpath_var=LD_LIBRARY_PATH
+   shlibpath_overrides_runpath=no
+   sys_lib_dlsearch_path_spec="/lib${libsuff} /usr/lib${libsuff}"
+--- kdelibs-3.5.10/acinclude.m4~	2018-11-25 17:12:05.000000000 +0100
++++ kdelibs-3.5.10/acinclude.m4	2018-11-25 18:03:46.954375525 +0100
+@@ -6436,6 +6436,10 @@
+     *32-bit*)
+       LINUX_64_MODE="32"
+       case $host in
++        x86_64-*linux*gnux32)
++          LINUX_64_MODE="x32"
++	  LD="${LD-ld} -m elf32_x86_64"
++	  ;;
+         x86_64-*linux*)
+           LD="${LD-ld} -m elf_i386"
+           ;;
+@@ -7366,6 +7370,9 @@
+       libsuff=64
+     fi
+   fi
++  if test "x$LINUX_64_MODE" = x32; then
++    libsuff=x32
++  fi
+   shlibpath_var=LD_LIBRARY_PATH
+   shlibpath_overrides_runpath=no
+   sys_lib_dlsearch_path_spec="/lib${libsuff} /usr/lib${libsuff}"
