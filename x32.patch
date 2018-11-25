@@ -15,7 +15,7 @@
        libsuff=64
      fi
    fi
-+  if test "x$LINUX_64_MODE" = x32; then
++  if test "x$LINUX_64_MODE" = xx32; then
 +    libsuff=x32
 +  fi
    shlibpath_var=LD_LIBRARY_PATH
@@ -38,7 +38,7 @@
        libsuff=64
      fi
    fi
-+  if test "x$LINUX_64_MODE" = x32; then
++  if test "x$LINUX_64_MODE" = xx32; then
 +    libsuff=x32
 +  fi
    shlibpath_var=LD_LIBRARY_PATH
